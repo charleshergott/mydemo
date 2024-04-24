@@ -16,7 +16,6 @@ export class AppComponent {
   categories = database.data;
   recipes: any[] = [];
 
-
   handleClick($event: any) {
     this.title = 'demo'
   };
