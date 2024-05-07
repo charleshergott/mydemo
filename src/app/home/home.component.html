@@ -1,68 +1,33 @@
 <app-header title="{{ title }}" (buttonClicked)="handleButtonClicked($event)">
 </app-header>
 
-
-<div>
-    <h2>Categories</h2>
-    <ul>
-        <li *ngFor="let cat of categories" (click)="selectedCategorie = cat">
-            {{ cat.title | titlecase }}
-        </li>
-    </ul>
-</div>
-
-<div>
-    <h2>Recipes</h2>
+<ion-content>
 
 
-    <ul *ngFor="let cat of categories | filterByCategory : selectedCategorie">
-        <li *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
-            {{ recipe.title }}
-        </li>
-    </ul>
 
-    <button (click)="handleClick($event)">
-        order now {{ orderForm.value | totalPrice }}
-    </button>
-</div>
+    <div>
+        <h2>Categories</h2>
+        <ul>
+            <li *ngFor="let cat of categories" (click)="selectedCategorie = cat">
+                {{ cat.title | titlecase }}
+            </li>
+        </ul>
+    </div>
 
-<tbody>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Report Coverage</td>
-        <td style="width: 454.719px; height: 22.3906px;">Details</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Market Size</td>
-        <td style="width: 454.719px; height: 22.3906px;">US$ 102.38 Billion by 2030</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Growth Rate</td>
-        <td style="width: 454.719px; height: 22.3906px;">CAGR of 18.2% from 2022 to 2030</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Largest Market</td>
-        <td style="width: 454.719px; height: 22.3906px;">North America</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Fastest Growing Market</td>
-        <td style="width: 454.719px; height: 22.3906px;">Asia Pacific</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Base Year</td>
-        <td style="width: 454.719px; height: 22.3906px;">2021</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Forecast Period</td>
-        <td style="width: 454.719px; height: 22.3906px;">2022 to 2030</td>
-    </tr>
-    <tr style="height: 22.3906px;">
-        <td style="width: 454.719px; height: 22.3906px;">Segments Covered</td>
-        <td style="width: 454.719px; height: 22.3906px;">Type, Application, Component, Payload, Region</td>
-    </tr>
-    <tr style="height: 111.938px;">
-        <td style="width: 454.719px; height: 111.938px;">Companies Mentioned</td>
-        <td style="width: 454.719px; height: 111.938px;">General Atomics Aeronautical Systems, Israel Aerospace
-            Industries, ALCORE Technologies, BAE Systems, Nimbus, VTOL Technologies, Xiaomi, ING Robotic Aviation,
-            PrecisionHawk, Lockheed Martin</td>
-    </tr>
-</tbody>
+    <div>
+        <h2>Recipes</h2>
+
+
+        <ul *ngFor="let cat of categories | filterByCategory : selectedCategorie">
+            <li *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
+                {{ recipe.title }}
+            </li>
+        </ul>
+
+        <button (click)="handleClick($event)">
+            order now {{ orderForm.value | totalPrice }}
+        </button>
+    </div>
+
+
+</ion-content>

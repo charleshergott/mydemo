@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-demo',
   standalone: true,
-  imports: [],
+  imports: [IonicModule],
   templateUrl: './demo.component.html',
-  styleUrl: './demo.component.css'
+  styleUrl: './demo.component.scss'
 })
 export class DemoComponent {
 

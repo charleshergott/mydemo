@@ -13,6 +13,7 @@ import {
 import { ApiService } from '../../services/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-home',
@@ -24,14 +25,15 @@ import { HeaderComponent } from '../header/header.component';
     CommonModule,
     FilterByCategoryPipe,
     TotalPricePipe,
-    ReactiveFormsModule],
+    ReactiveFormsModule,
+    IonicModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
-  title!: string; //  = database.title;
-  categories!: any[]; //  = database.data;
-  selectedCategorie!: any; //  = database.data[0];
+  title!: string;
+  categories: any[] = [];
+  selectedCategorie!: any;
   order: any[] = [];
   orderForm: FormArray<
     FormGroup<{
@@ -63,7 +65,7 @@ export class HomeComponent {
   }
 
   handleClick(event: MouseEvent) {
-    event.stopPropagation(); // Prevent the click event from propagating to the parent elements
+    event.stopPropagation();
     const cartItems = this.orderForm.value.map((control: any) => {
       const recipeFormGroup = control.recipe;
       return {

@@ -4,6 +4,7 @@ import { KitchenComponent } from './kitchen/kitchen.component';
 import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
+import { provideIonicAngular } from '@ionic/angular/standalone';
 
 export const config: ApplicationConfig = {
   providers: [
@@ -40,6 +41,6 @@ export const config: ApplicationConfig = {
         redirectTo: '404',
         pathMatch: 'full',
       },
-    ]),
+    ]), provideIonicAngular({}),
   ],
 };

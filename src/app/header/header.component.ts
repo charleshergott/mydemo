@@ -1,13 +1,14 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
 
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IonicModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css',
+  styleUrl: './header.component.scss',
   template: `<button (click)="emitEvent()">emit event</button>`,
 })
 
@@ -27,6 +28,7 @@ export class HeaderComponent {
   }
 
 }
+
 
 
 

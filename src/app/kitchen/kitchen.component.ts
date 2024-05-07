@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { IonicModule } from '@ionic/angular';
 
 @Component({
   selector: 'app-kitchen',
   standalone: true,
-  imports: [],
+  imports: [IonicModule],
   templateUrl: './kitchen.component.html',
-  styleUrl: './kitchen.component.css'
+  styleUrl: './kitchen.component.scss'
 })
 export class KitchenComponent {
 

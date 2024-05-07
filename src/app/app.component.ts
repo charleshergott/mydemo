@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
+import { IonicModule } from '@ionic/angular';
 
 
 @Component({
@@ -8,10 +9,12 @@ import { HomeComponent } from './home/home.component';
   standalone: true,
   imports: [
     RouterOutlet,
-    HomeComponent
+    HomeComponent,
+    IonicModule
   ],
+  template: '<router-outlet></router-outlet>',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.scss'
 })
 
 export class AppComponent {
