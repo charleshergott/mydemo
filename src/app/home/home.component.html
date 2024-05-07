@@ -1,20 +1,68 @@
-<app-header title="{{ title }}" (buttonClicked)="handleButtonClicked($event)">
+<app-header title="{{ title }}">
 </app-header>
 
-<ion-content>
+
+<ion-split-pane when="xs" contentId="main">
+    <ion-menu contentId="main">
+        <ion-header>
+            <ion-toolbar color="tertiary">
+                <ion-title>
+                    <h1>Categories</h1>
+                </ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding" *ngFor="let cat of categories" (click)="selectedCategorie = cat">
+            {{ cat.title | titlecase }} </ion-content>
+    </ion-menu>
+
+    <div class="ion-page" id="main">
+        <ion-header>
+            <ion-toolbar>
+                <ion-title>Recipes</ion-title>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+            <ion-grid>
+                <ion-row *ngFor="let cat of categories | filterByCategory: selectedCategorie"
+                    (click)="selectedCategorie = cat">
+                    <ion-col size="4" *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
+                        <img src="{{recipe.imageUrl || './assets/cocacola.png'}}"
+                            style="width: 250px; height: 250px; border-radius: 50%;">
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-content>
+    </div>
+</ion-split-pane>
 
 
 
-    <div>
+
+
+
+<!-- <ion-grid [fixed]="true">
+        <h1>Categories</h1>
+        <ion-row *ngFor="let cat of categories" (click)="selectedCategorie = cat">
+            <ion-col size="6">{{ cat.title | titlecase }}</ion-col>
+            <ion-col size="4" *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
+                <img src="{{recipe.imageUrl || './assets/cocacola.png'}}"
+                    style="width: 50px; height: 50px; border-radius: 50%;">
+            </ion-col>
+
+        </ion-row>
+    </ion-grid> -->
+
+
+<!-- <div>
         <h2>Categories</h2>
         <ul>
             <li *ngFor="let cat of categories" (click)="selectedCategorie = cat">
                 {{ cat.title | titlecase }}
             </li>
         </ul>
-    </div>
+    </div> -->
 
-    <div>
+<!-- <div>
         <h2>Recipes</h2>
 
 
@@ -27,7 +75,4 @@
         <button (click)="handleClick($event)">
             order now {{ orderForm.value | totalPrice }}
         </button>
-    </div>
-
-
-</ion-content>
+    </div> -->
