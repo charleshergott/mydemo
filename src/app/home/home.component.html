@@ -13,6 +13,9 @@
         </ion-header>
         <ion-content class="ion-padding" *ngFor="let cat of categories" (click)="selectedCategorie = cat">
             {{ cat.title | titlecase }} </ion-content>
+
+
+
     </ion-menu>
 
     <div class="ion-page" id="main">
@@ -26,13 +29,27 @@
                 <ion-row *ngFor="let cat of categories | filterByCategory: selectedCategorie"
                     (click)="selectedCategorie = cat">
                     <ion-col size="4" *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
-                        <img src="{{recipe.imageUrl || './assets/cocacola.png'}}"
-                            style="width: 250px; height: 250px; border-radius: 50%;">
+                        <ion-card style="height: 400px;">
+                            <img alt="recipe" src="{{recipe.imageUrl || './assets/cocacola.png'}}"
+                                style="width: 150px; height: 150px; border-radius: 50%;" />
+                            <ion-card-header>
+                                <ion-card-title>{{recipe.title}}</ion-card-title>
+                                <ion-card-subtitle></ion-card-subtitle>
+                            </ion-card-header>
+                            <ion-card-content>
+                                {{recipe.description}}
+                            </ion-card-content>
+                        </ion-card>
                     </ion-col>
                 </ion-row>
             </ion-grid>
+
         </ion-content>
     </div>
+
+    <ion-button expand="block" (click)="handleClick($event)">
+        ORDER NOW {{ orderForm.value | totalPrice }}
+    </ion-button>
 </ion-split-pane>
 
 
