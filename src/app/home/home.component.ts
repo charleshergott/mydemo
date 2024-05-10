@@ -41,6 +41,7 @@ export class HomeComponent {
       recipe: FormGroup<{
         uuid: FormControl;
         price: FormControl;
+        title: FormControl;
       }>;
     }>
   > = new FormArray([],
@@ -57,10 +58,11 @@ export class HomeComponent {
       this.title = database.title;
       this.categories = database.data;
       this.selectedCategorie = database.data[0];
+
     });
 
-    console.log(this.orderForm);
-    console.log(this.orderForm.value);
+    // console.log(this.orderForm);
+    // console.log(this.orderForm.value);
     this.orderForm.markAsTouched();
   }
 
@@ -79,13 +81,13 @@ export class HomeComponent {
     this.displayAlert('Items in Cart:\n' + alertMessage);
   }
 
-  handleButtonClicked($event: any) {
-  }
+  // handleButtonClicked($event: any) {
+  // }
 
-  buttonClicked($event: any) { }
+  // buttonClicked($event: any) { }
 
   addToCart(recipe: any) {
-    const index = this.orderForm.value.findIndex((r) => {
+    const index = this.orderForm.value.findIndex((r, t) => {
       return r?.recipe?.uuid === recipe.uuid;
     });
 
@@ -102,6 +104,10 @@ export class HomeComponent {
           Validators.compose([Validators.required, Validators.min(1)])
         ),
         recipe: new FormGroup({
+          title: new FormControl(
+            recipe.title, // Add the title property here
+            Validators.required
+          ),
           price: new FormControl(
             recipe.price,
             Validators.compose([Validators.required, Validators.min(1)])
@@ -112,6 +118,7 @@ export class HomeComponent {
       this.orderForm.push(newControl);
     }
   }
+
 
   private displayAlert(message: string): void {
     alert(message);

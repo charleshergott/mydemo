@@ -1,5 +1,15 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>{{ title }}</ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <div class="menuWrapper">
+            <ion-title *ngIf="title">
+                {{ title | uppercase }}
+            </ion-title>
+            <div class="cart">
+                CART
+            </div>
+        </div>
     </ion-toolbar>
 </ion-header>
