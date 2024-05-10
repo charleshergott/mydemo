@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { provideIonicAngular } from '@ionic/angular/standalone';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const config: ApplicationConfig = {
   providers: [
@@ -41,6 +42,6 @@ export const config: ApplicationConfig = {
         redirectTo: '404',
         pathMatch: 'full',
       },
-    ]), provideIonicAngular({}),
+    ]), provideIonicAngular({}), provideAnimationsAsync(),
   ],
 };

@@ -8,8 +8,14 @@
                 {{ title | uppercase }}
             </ion-title>
             <div class="cart">
-                CART
+                <div>
+                    <p>Total Items: {{ getTotalItems() }}</p>
+                    <p>Total Price: {{ getTotalPrice() | currency}}</p>
+                </div>
             </div>
+
+
+
         </div>
     </ion-toolbar>
 </ion-header>

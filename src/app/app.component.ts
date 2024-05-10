@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { IonicModule } from '@ionic/angular';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @Component({
@@ -10,7 +11,8 @@ import { IonicModule } from '@ionic/angular';
   imports: [
     RouterOutlet,
     HomeComponent,
-    IonicModule
+    IonicModule,
+    MatDialogModule
   ],
   template: '<router-outlet></router-outlet>',
   templateUrl: './app.component.html',

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FilterByCategoryPipe } from '../../pipe/filter-by-category.pipe';
@@ -14,6 +14,11 @@ import { ApiService } from '../../services/api.service';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
+import { GotoCart } from '../../services/goto-cart.service';
+import { take } from 'rxjs';
+import { CartmodalComponent } from '../cartmodal/cartmodal.component';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +31,8 @@ import { IonicModule } from '@ionic/angular';
     FilterByCategoryPipe,
     TotalPricePipe,
     ReactiveFormsModule,
-    IonicModule],
+    IonicModule,
+    MatDialogModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
@@ -51,7 +57,9 @@ export class HomeComponent {
       Validators.maxLength(3),
     ])) as any;
 
-  constructor(apiService: ApiService) {
+
+
+  constructor(apiService: ApiService, private gotoCart: GotoCart, private dialog: MatDialog) {
     // where does 'database' come from?
     apiService.getData().then((database) => {
       console.log('>>>>', database);
@@ -66,25 +74,20 @@ export class HomeComponent {
     this.orderForm.markAsTouched();
   }
 
-  handleClick(event: MouseEvent) {
-    event.stopPropagation();
-    const cartItems = this.orderForm.value.map((control: any) => {
-      const recipeFormGroup = control.recipe;
-      return {
-        title: recipeFormGroup.title,
-        quantity: control.quantity
-      };
-    });
-
-    const alertMessage = cartItems.map((item: any) => `${item.quantity} x ${item.title}`).join('\n');
-
-    this.displayAlert('Items in Cart:\n' + alertMessage);
-  }
-
   // handleButtonClicked($event: any) {
   // }
 
   // buttonClicked($event: any) { }
+
+
+  handleClick(event: MouseEvent) {
+    //event.stopPropagation();
+    // Open the modal
+    const dialogRef = this.dialog.open(CartmodalComponent, {
+      width: '500px',
+      data: {} // You can pass data to the modal if needed
+    });
+  }
 
   addToCart(recipe: any) {
     const index = this.orderForm.value.findIndex((r, t) => {
@@ -105,7 +108,7 @@ export class HomeComponent {
         ),
         recipe: new FormGroup({
           title: new FormControl(
-            recipe.title, // Add the title property here
+            recipe.title,
             Validators.required
           ),
           price: new FormControl(
@@ -115,13 +118,22 @@ export class HomeComponent {
           uuid: new FormControl(recipe.uuid),
         }),
       });
-      this.orderForm.push(newControl);
+
+      // Get the current cart items from the service
+      let currentCartItems: any[] = [];
+      this.gotoCart.cartItems$.pipe(take(1)).subscribe((cartItems: any[]) => {
+        currentCartItems = cartItems || [];
+      });
+
+      // Add the new item to the current cart items
+      const updatedCartItems = [...currentCartItems, newControl.value];
+
+      // Update the cart items in the service
+      this.gotoCart.updateCartItems(updatedCartItems);
     }
   }
 
 
-  private displayAlert(message: string): void {
-    alert(message);
-  }
+
 }
 
