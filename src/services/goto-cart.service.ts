@@ -1,20 +1,26 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class GotoCart {
-  private cartItemsSubject = new BehaviorSubject<any[]>([]);
-  cartItems$: Observable<any[]> = this.cartItemsSubject.asObservable();
+  private cartItemsSource = new BehaviorSubject<any[]>([]);
+  cartItems$ = this.cartItemsSource.asObservable();
+
+  private totalPriceSource = new BehaviorSubject<number>(0);
+  totalPrice$ = this.totalPriceSource.asObservable();
 
   constructor() { }
 
   updateCartItems(cartItems: any[]) {
-    this.cartItemsSubject.next(cartItems);
+    this.cartItemsSource.next(cartItems);
+  }
+
+  updateTotalPrice(totalPrice: number) {
+    this.totalPriceSource.next(totalPrice);
   }
 }
+
 
 

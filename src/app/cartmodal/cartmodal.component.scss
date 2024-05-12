@@ -1,1 +1,59 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+/* cartmodal.component.scss */
+
+/* Style the ion-header */
+ion-header {
+    ion-toolbar {
+        --background: #007bff;
+        /* Set header background color */
+        --color: #fff;
+        /* Set header text color */
+    }
+
+    ion-title {
+        font-size: 20px;
+        /* Set title font size */
+    }
+}
+
+/* Style the close button */
+ion-button.close-button {
+    --color: #fff;
+    /* Set button text color */
+}
+
+/* Style the ion-content */
+ion-content {
+    --background: #f4f4f4;
+    /* Set content background color */
+}
+
+/* Style the ion-list and ion-item */
+ion-list {
+    ion-item {
+        min-height: 60px;
+        /* Set minimum item height */
+        padding: 10px;
+        /* Add padding around item content */
+        border-bottom: 1px solid #ccc;
+        /* Add border bottom */
+        --ion-item-background: #fff;
+        /* Set item background color */
+    }
+
+    ion-item:last-child {
+        border-bottom: none;
+        /* Remove border bottom from last item */
+    }
+
+    ion-label {
+        font-weight: bold;
+        /* Make label text bold */
+    }
+
+    ion-note {
+        font-size: 14px;
+        /* Set note font size */
+        color: #666;
+        /* Set note text color */
+    }
+}

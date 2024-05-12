@@ -1,5 +1,6 @@
 <ion-split-pane contentId="main">
 
+
     <ion-menu contentId="main" #myMenu>
         <ion-header>
             <ion-toolbar color="tertiary">
@@ -21,7 +22,7 @@
 
 
     <div class="ion-page" id="main">
-        <app-header title="{{title}}"></app-header>
+        <app-header title="{{title}}" (startOverEvent)="resetCart()"></app-header>
 
 
         <ion-content class="ion-padding">
@@ -48,83 +49,13 @@
         </ion-content>
 
 
-        <ion-button expand="block" (click)="handleClick">
+        <ion-button expand="block" (click)="handleClick($event)">
             GO TO CART {{ orderForm.value | totalPrice }}
         </ion-button>
+
 
     </div>
 
 
 
 </ion-split-pane>
-<!-- <div class="ion-page" id="main">
-        <app-header title="{{ title }}">
-        </app-header>
-        <ion-content class="ion-padding">
-            <ion-grid>
-                <ion-row *ngFor="let cat of categories | filterByCategory: selectedCategorie"
-                    (click)="selectedCategorie = cat">
-                    <ion-col size="4" *ngFor="let recipe of cat.recipes">
-                        <ion-card style="height: 400px;">
-                            <img alt="recipe" src="{{recipe.imageUrl || './assets/cocacola.png'}}"
-                                style="width: 150px; height: 150px; border-radius: 50%;" />
-                            <ion-card-header>
-                                <ion-card-title>{{recipe.title}}</ion-card-title>
-                                <ion-card-subtitle></ion-card-subtitle>
-                            </ion-card-header>
-                            <ion-card-content>
-                                {{recipe.description}}
-                            </ion-card-content>
-                            <ion-button color="success" fill="clear" (click)="addToCart(recipe)">GO FOR IT
-                            </ion-button>
-                        </ion-card>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-
-        </ion-content> 
-    </div>-->
-
-
-
-
-
-
-
-
-<!-- <ion-grid [fixed]="true">
-        <h1>Categories</h1>
-        <ion-row *ngFor="let cat of categories" (click)="selectedCategorie = cat">
-            <ion-col size="6">{{ cat.title | titlecase }}</ion-col>
-            <ion-col size="4" *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
-                <img src="{{recipe.imageUrl || './assets/cocacola.png'}}"
-                    style="width: 50px; height: 50px; border-radius: 50%;">
-            </ion-col>
-
-        </ion-row>
-    </ion-grid> -->
-
-
-<!-- <div>
-        <h2>Categories</h2>
-        <ul>
-            <li *ngFor="let cat of categories" (click)="selectedCategorie = cat">
-                {{ cat.title | titlecase }}
-            </li>
-        </ul>
-    </div> -->
-
-<!-- <div>
-        <h2>Recipes</h2>
-
-
-        <ul *ngFor="let cat of categories | filterByCategory : selectedCategorie">
-            <li *ngFor="let recipe of cat.recipes" (click)="addToCart(recipe)">
-                {{ recipe.title }}
-            </li>
-        </ul>
-
-        <button (click)="handleClick($event)">
-            order now {{ orderForm.value | totalPrice }}
-        </button>
-    </div> -->

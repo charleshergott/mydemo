@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FilterByCategoryPipe } from '../../pipe/filter-by-category.pipe';
@@ -37,6 +37,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
+
+  cartItems: any[] = [];
   title!: string;
   categories: any[] = [];
   selectedCategorie!: any;
@@ -60,7 +62,7 @@ export class HomeComponent {
 
 
   constructor(apiService: ApiService, private gotoCart: GotoCart, private dialog: MatDialog) {
-    // where does 'database' come from?
+
     apiService.getData().then((database) => {
       console.log('>>>>', database);
       this.title = database.title;
@@ -69,24 +71,27 @@ export class HomeComponent {
 
     });
 
-    // console.log(this.orderForm);
-    // console.log(this.orderForm.value);
     this.orderForm.markAsTouched();
   }
 
-  // handleButtonClicked($event: any) {
-  // }
-
-  // buttonClicked($event: any) { }
-
-
   handleClick(event: MouseEvent) {
-    //event.stopPropagation();
-    // Open the modal
     const dialogRef = this.dialog.open(CartmodalComponent, {
-      width: '500px',
-      data: {} // You can pass data to the modal if needed
+      width: '80%',
+      height: '500px',
+      data: { cartItems: this.cartItems }
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      // Reset the cart items in the home component
+      this.resetCart();
+      console.log('Modal closed');
+    });
+  }
+
+  resetCart(): void {
+    // Reset the cart items in the home component
+    this.cartItems = [];
+    console.log('Cart items reset:', this.cartItems);
   }
 
   addToCart(recipe: any) {
@@ -119,20 +124,36 @@ export class HomeComponent {
         }),
       });
 
-      // Get the current cart items from the service
       let currentCartItems: any[] = [];
       this.gotoCart.cartItems$.pipe(take(1)).subscribe((cartItems: any[]) => {
         currentCartItems = cartItems || [];
       });
 
-      // Add the new item to the current cart items
-      const updatedCartItems = [...currentCartItems, newControl.value];
+      // Check if the item already exists in the cart
+      const existingIndex = currentCartItems.findIndex(item => item.recipe.uuid === recipe.uuid);
+      if (existingIndex !== -1) {
+        // If the item exists, update its quantity
+        currentCartItems[existingIndex].quantity++;
 
-      // Update the cart items in the service
-      this.gotoCart.updateCartItems(updatedCartItems);
+        // Recalculate the total price based on all items in the cart
+        const totalPrice = currentCartItems.reduce((acc, item) => acc + item.recipe.price * item.quantity, 0);
+
+        // Update the total price in the service
+        this.gotoCart.updateTotalPrice(totalPrice);
+      } else {
+        // If the item doesn't exist, add it to the cart
+        currentCartItems.push({ recipe: recipe, quantity: 1, totalPrice: recipe.price });
+      }
+
+      // Calculate the total price
+      const totalPrice = currentCartItems.reduce((acc, item) => acc + item.totalPrice, 0);
+
+      // Update the cart items and total price in the service
+      this.gotoCart.updateCartItems(currentCartItems);
+      this.gotoCart.updateTotalPrice(totalPrice);
+      this.cartItems = currentCartItems; // Update local cart items
     }
   }
-
 
 
 }

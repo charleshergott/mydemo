@@ -1,6 +1,5 @@
-import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subscription } from 'rxjs';
 import { IonicModule } from '@ionic/angular';
 import { GotoCart } from '../../services/goto-cart.service';
 import { CartItem } from '../cartItems.interface';
@@ -56,6 +55,10 @@ export class HeaderComponent {
     } else {
       return 'var(--secondary-color)';
     }
+  }
+
+  resetCart(): void {
+    this.cartItems = [];
   }
 }
 

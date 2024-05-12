@@ -1,3 +1,41 @@
-<p>
-  cartmodal works!
-</p>
+<ion-content>
+
+  <ion-header>
+    <ion-toolbar color="primary">
+      <ion-title>Cart</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="closeModal()">
+          <ion-icon slot="icon-only" name="close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
+
+
+  <ion-list>
+    <ion-item *ngFor="let item of cartData">
+      <ion-label>{{ item.recipe.title }} <img alt="recipe" src="{{item.recipe.imageUrl || './assets/cocacola.png'}}"
+          style="width: 150px; height: 150px; border-radius: 50%;" /> </ion-label>
+      <ion-note slot="end">Quantity: {{ item.quantity }}</ion-note>
+      <ion-note slot="end">Price: {{ (item.quantity * item.recipe.price) / 100 | currency }}</ion-note>
+      <ion-buttons slot="end">
+        <ion-button (click)="incrementQuantity(item)" fill="clear" size="small" color="danger">
+          <ion-icon name="add">+</ion-icon>
+        </ion-button>
+        <ion-button (click)="decrementQuantity(item)" fill="clear" size="small" color="danger">
+          <ion-icon name="remove">-</ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
+
+  <ion-item>
+    <ion-label>Total Amount:</ion-label>
+    <ion-note slot="end">
+      <h1>{{ (getTotalAmount())/100 | currency }}</h1>
+    </ion-note>
+  </ion-item>
+  <ion-button expand="block" (click)="buyItems()">BUY: {{ (getTotalAmount())/100 | currency }}</ion-button>
+  <ion-button expand="block" color="medium" (click)="startOver()">Start Over</ion-button>
+
+</ion-content>
