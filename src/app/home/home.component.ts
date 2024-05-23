@@ -63,7 +63,10 @@ export class HomeComponent {
 
 
 
-  constructor(apiService: ApiService, private gotoCart: GotoCart, private dialog: MatDialog) {
+  constructor(
+    apiService: ApiService,
+    private gotoCart: GotoCart,
+    private dialog: MatDialog) {
 
     apiService.getData().then((database) => {
       console.log('>>>>', database);
