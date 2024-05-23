@@ -1,7 +1,10 @@
-<ion-content>
-    <div *ngFor="let recipe of selectedRecipes">
-        <h3>{{ recipe. nutritionalInfo }}</h3>
+<ion-content *ngIf="data$ | async as orders">
+    <ul *ngFor="let order of orders" class="styled-list">
+        <li>
+            {{order.id}}
+        </li>
+        <li>
 
-    </div>
-
+        </li>
+    </ul>
 </ion-content>

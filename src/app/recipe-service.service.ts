@@ -15,9 +15,9 @@ export class RecipeService {
     this.selectedRecipesSubject.next([...selectedRecipes, recipe]);
   }
 
-  removeRecipe(recipe: Recipe): void {
-    const selectedRecipes = this.selectedRecipesSubject.getValue();
-    const updatedRecipes = selectedRecipes.filter(r => r.id !== recipe.id);
-    this.selectedRecipesSubject.next(updatedRecipes);
-  }
+  // removeRecipe(recipe: Recipe): void {
+  //   const selectedRecipes = this.selectedRecipesSubject.getValue();
+  //   const updatedRecipes = selectedRecipes.filter(r => r.id !== recipe.id);
+  //   this.selectedRecipesSubject.next(updatedRecipes);
+  // }
 }

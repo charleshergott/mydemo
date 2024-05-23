@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { IonicModule } from '@ionic/angular';
 import { MatDialogModule } from '@angular/material/dialog';
+import { SigninComponent } from './signin/signin.component';
 
 
 @Component({
@@ -12,7 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     RouterOutlet,
     HomeComponent,
     IonicModule,
-    MatDialogModule
+    MatDialogModule,
+    SigninComponent
   ],
   template: '<router-outlet></router-outlet>',
   templateUrl: './app.component.html',
@@ -20,4 +22,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 })
 
 export class AppComponent {
+
+
+
 }
+

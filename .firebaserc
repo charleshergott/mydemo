@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "kitchen-cdda3": {
+      "hosting": {
+        "mydemo": [
+          "kitchen-cdda3"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "kitchen-cdda3"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "mydemo",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}

@@ -6,23 +6,29 @@ import { IonicModule } from '@ionic/angular';
 import { CartItem } from '../cartItems.interface';
 import { Recipe } from '../recipe.interface';
 import { RecipeService } from '../recipe-service.service';
+import { RouterOutlet } from '@angular/router';
+import { Firestore } from '@angular/fire/firestore';
+import { collection, addDoc } from 'firebase/firestore';
+
+
 
 @Component({
   selector: 'app-cartmodal',
   templateUrl: './cartmodal.component.html',
   styleUrls: ['./cartmodal.component.scss'],
-  imports: [CommonModule, HomeComponent, IonicModule],
+  imports: [CommonModule, HomeComponent, IonicModule, RouterOutlet],
   standalone: true,
 })
 export class CartmodalComponent implements OnInit {
   selectedRecipe!: Recipe;
 
-  @Input() cartData: any[];
+  @Input() cartData: CartItem[];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     public dialogRef: MatDialogRef<CartmodalComponent>,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private _firestore: Firestore
   ) {
     this.cartData = data.cartData;
   }
@@ -61,15 +67,12 @@ export class CartmodalComponent implements OnInit {
   }
 
   buyItems(): void {
-    // Placeholder implementation for buy action
     console.log('Buy button clicked!');
+    const docRef = collection(this._firestore, 'orderfood');
+    addDoc(docRef, { order: this.cartData });
   }
-
-
 
   startOver(): void {
-    // Emit an event to notify the parent component to start over
     this.dialogRef.close();
   }
-
 }
