@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FilterByCategoryPipe } from '../../pipe/filter-by-category.pipe';
@@ -19,6 +19,7 @@ import { take } from 'rxjs';
 import { CartmodalComponent } from '../cartmodal/cartmodal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
+import '@khmyznikov/pwa-install';
 
 @Component({
   selector: 'app-home',
@@ -34,7 +35,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     IonicModule,
     MatDialogModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent {
 
