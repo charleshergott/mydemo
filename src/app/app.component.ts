@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SigninComponent } from './signin/signin.component';
-import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonMenu, IonRow, IonSplitPane } from '@ionic/angular/standalone';
+import { IonApp, IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonMenu, IonRouterOutlet, IonRow, IonSplitPane } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -25,7 +25,9 @@ import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCo
     IonCardHeader,
     IonCardTitle,
     IonCardSubtitle,
-    IonButton
+    IonButton,
+    IonApp,
+    IonRouterOutlet
   ],
   template: '<router-outlet></router-outlet>',
   templateUrl: './app.component.html',
