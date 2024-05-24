@@ -11,7 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import { IonicModule } from '@ionic/angular';
 import { GotoCart } from '../../services/goto-cart.service';
@@ -24,9 +24,11 @@ import '@khmyznikov/pwa-install';
 @Component({
   selector: 'app-home',
   standalone: true,
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     HeaderComponent,
-    HttpClientModule,
     RouterOutlet,
     CommonModule,
     FilterByCategoryPipe,
@@ -34,9 +36,7 @@ import '@khmyznikov/pwa-install';
     ReactiveFormsModule,
     IonicModule,
     MatDialogModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss',
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+
 })
 export class HomeComponent {
 
@@ -60,8 +60,6 @@ export class HomeComponent {
       Validators.minLength(2),
       Validators.maxLength(3),
     ])) as any;
-
-
 
   constructor(
     apiService: ApiService,
@@ -87,14 +85,12 @@ export class HomeComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      // Reset the cart items in the home component
       this.resetCart();
       console.log('Modal closed');
     });
   }
 
   resetCart(): void {
-    // Reset the cart items in the home component
     this.cartItems = [];
     console.log('Cart items reset:', this.cartItems);
   }
@@ -134,29 +130,19 @@ export class HomeComponent {
         currentCartItems = cartItems || [];
       });
 
-      // Check if the item already exists in the cart
       const existingIndex = currentCartItems.findIndex(item => item.recipe.uuid === recipe.uuid);
       if (existingIndex !== -1) {
-        // If the item exists, update its quantity
         currentCartItems[existingIndex].quantity++;
-
-        // Recalculate the total price based on all items in the cart
         const totalPrice = currentCartItems.reduce((acc, item) => acc + item.recipe.price * item.quantity, 0);
-
-        // Update the total price in the service
         this.gotoCart.updateTotalPrice(totalPrice);
       } else {
-        // If the item doesn't exist, add it to the cart
         currentCartItems.push({ recipe: recipe, quantity: 1, totalPrice: recipe.price });
       }
 
-      // Calculate the total price
       const totalPrice = currentCartItems.reduce((acc, item) => acc + item.totalPrice, 0);
-
-      // Update the cart items and total price in the service
       this.gotoCart.updateCartItems(currentCartItems);
       this.gotoCart.updateTotalPrice(totalPrice);
-      this.cartItems = currentCartItems; // Update local cart items
+      this.cartItems = currentCartItems;
     }
   }
 

@@ -70,7 +70,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "1.4mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -151,7 +151,7 @@
             }
           }
         },
-        "deploy": {
+        "deploy-fb": {
           "builder": "@angular/fire:deploy",
           "options": {
             "version": 2
@@ -167,6 +167,9 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
