@@ -11,15 +11,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { ApiService } from '../../services/api.service';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
-import { IonicModule } from '@ionic/angular';
 import { GotoCart } from '../../services/goto-cart.service';
 import { take } from 'rxjs';
 import { CartmodalComponent } from '../cartmodal/cartmodal.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDialogModule } from '@angular/material/dialog';
 import '@khmyznikov/pwa-install';
+import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonMenu, IonRow, IonSplitPane } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-home',
@@ -34,10 +33,21 @@ import '@khmyznikov/pwa-install';
     FilterByCategoryPipe,
     TotalPricePipe,
     ReactiveFormsModule,
-    IonicModule,
-    MatDialogModule],
-
+    MatDialogModule,
+    IonHeader,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonButton,],
 })
+
 export class HomeComponent {
 
   cartItems: any[] = [];

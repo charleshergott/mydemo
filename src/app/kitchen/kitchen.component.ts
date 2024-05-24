@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
 import { OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Firestore, collectionData } from '@angular/fire/firestore';
 import { collection, query } from 'firebase/firestore';
+import { IonButton, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonMenu, IonRow, IonSplitPane } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -11,7 +11,20 @@ import { collection, query } from 'firebase/firestore';
   templateUrl: './kitchen.component.html',
   styleUrls: ['./kitchen.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [CommonModule,
+    IonHeader,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonButton
+  ]
 })
 export class KitchenComponent implements OnInit {
 

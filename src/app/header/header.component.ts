@@ -1,15 +1,32 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
 import { GotoCart } from '../../services/goto-cart.service';
 import { CartItem } from '../cartItems.interface';
+import { IonButton, IonButtons, IonCard, IonCardHeader, IonCardSubtitle, IonCardTitle, IonCol, IonContent, IonGrid, IonHeader, IonMenu, IonMenuButton, IonRow, IonSplitPane, IonTitle, IonToolbar } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [IonicModule, CommonModule]
+  imports: [CommonModule,
+    IonHeader,
+    IonSplitPane,
+    IonMenu,
+    IonContent,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonCard,
+    IonCardHeader,
+    IonCardTitle,
+    IonCardSubtitle,
+    IonButton,
+    IonToolbar,
+    IonButtons,
+    IonMenuButton,
+    IonTitle
+  ]
 })
 export class HeaderComponent {
 
